@@ -1,0 +1,33 @@
+<?php
+include_once( "inc/auth.inc.php" );
+$HTML_PAGE_TITLE = _( "微信企业号设置" );
+$HTML_PAGE_BASE_STYLE = FALSE;
+include_once( "inc/header.inc.php" );
+echo "<body>\r\n<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+echo MYOA_JS_SERVER;
+echo "/static/js/bootstrap/css/bootstrap.css\">\r\n<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+echo MYOA_JS_SERVER;
+echo "/static/modules/weixinqy/style.css\">\r\n<script type=\"text/javascript\" src=\"";
+echo MYOA_JS_SERVER;
+echo "/static/js/jquery-1.10.2/jquery.min.js";
+echo $GZIP_POSTFIX;
+echo "\"></script>\r\n<script type=\"text/javascript\">\r\n\$(function(){\r\n    \$(\".func_box li\").on(\"click\", function(){\r\n        \$(\".func_box li\").removeClass(\"cur\");\r\n        var url = \$(this).find(\"a\").attr(\"data-module\");\r\n        var a = [];\r\n        a = url.split(\".\");\r\n        \$(this).addClass(\"cur\");\r\n        \$(\"#iframe\").attr(\"src\", a[0] + \"/\" + a[1] + \".php\");\r\n    });\r\n\r\n    \$(\"#iframe\").on(\"load\", function(){\r\n        \$(\"#content-wrap\").height(\$(\"#iframe\").contents().find(\"body\").outerHeight(true) + 20);\r\n    });\r\n});\r\n</script>\r\n<div id=\"homepage\" class=\"container\">\r\n    <div class=\"row\">\r\n\r\n        <div class=\"span3 bs-docs-sidebar\">\r\n            <div class=\"func_box\">\r\n                <div class=\"hd\">";
+echo _( "基础设置" );
+echo "</div>\r\n                <div class=\"bd\">\r\n                    <ul class=\"nav nav-list bs-docs-sidenav affix-top\">\r\n                        <li class=\"cur\"><a href=\"javascript:;\" data-module=\"basic.setting\"><i class=\"icon-chevron-right\"></i> ";
+echo _( "基础参数设置" );
+echo "</a></li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"func_box\">\r\n                <div class=\"hd\">";
+echo _( "数据导入" );
+echo "</div>\r\n                <div class=\"bd\">\r\n                    <ul class=\"nav nav-list bs-docs-sidenav affix-top\">\r\n                        <li><a href=\"javascript:;\" data-module=\"basic.oa_org\"><i class=\"icon-chevron-right\"></i> ";
+echo _( "组织架构初始化" );
+echo "</a></li>\r\n                        <li><a href=\"javascript:;\" data-module=\"basic.oa_user\"><i class=\"icon-chevron-right\"></i> ";
+echo _( "用户管理" );
+echo "</a></li>\r\n                    </ul>\r\n                </div>    \r\n            </div>\r\n\r\n            <div class=\"func_box\">\r\n                <div class=\"hd\">";
+echo _( "应用设置" );
+echo "</div>\r\n                <div class=\"bd\">\r\n                    <ul class=\"nav nav-list bs-docs-sidenav affix-top\">\r\n    <li><a href=\"javascript:;\" data-module=\"basic.weixin_app_sms\"><i class=\"icon-chevron-right\"></i> ";
+echo _( "事务提醒" );
+echo "</a></li>\r\n</ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"func_box\">\r\n                <div class=\"hd\">";
+echo _( "基础功能" );
+echo "</div>\r\n                <div class=\"bd\">\r\n                    <ul class=\"nav nav-list bs-docs-sidenav affix-top\">\r\n                        <li><a href=\"javascript:;\" data-module=\"basic.weixin_org\"><i class=\"icon-chevron-right\"></i> ";
+echo _( "微信组织架构管理" );
+echo "</a></li>\r\n                    </ul>    \r\n                </div>    \r\n            </div>\r\n        </div>\r\n\r\n        <div id=\"content-wrap\" class=\"span9\">\r\n            <iframe id=\"iframe\" src=\"basic/setting.php\" frameborder=\"0\"></iframe>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n</body>\r\n</html>";
+?>

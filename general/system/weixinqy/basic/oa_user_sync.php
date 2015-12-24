@@ -1,0 +1,40 @@
+<?php
+include_once( "inc/auth.inc.php" );
+require_once( "inc/weixinqy/class/weixinqy.department.funcs.php" );
+$HTML_PAGE_TITLE = _( "数据导入 - 人员" );
+$HTML_PAGE_BASE_STYLE = FALSE;
+include_once( "inc/header.inc.php" );
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+echo MYOA_STATIC_SERVER;
+echo "/static/js/bootstrap/css/bootstrap.css\">\r\n<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+echo MYOA_STATIC_SERVER;
+echo "/static/modules/weixinqy/style.css\">\r\n<script type=\"text/javascript\" src=\"";
+echo MYOA_JS_SERVER;
+echo "/static/js/jquery-1.10.2/jquery.min.js";
+echo $GZIP_POSTFIX;
+echo "\"></script>\r\n<script type=\"text/javascript\" src=\"";
+echo MYOA_JS_SERVER;
+echo "/static/js/bootstrap/js/bootstrap.min.js";
+echo $GZIP_POSTFIX;
+echo "\"></script>\r\n<body class=\"abody\">\r\n<script type=\"text/javascript\">\r\nvar S = {\r\n    'import' : 0\r\n};\r\n\$(document).ready(function(){\r\n        \$(\"#btn-oa-user-sync\").click(function(){\r\n        var self = \$(this);\r\n        if(S.import == 1)\r\n        {\r\n            alert(\"正在导入，请等待\");\r\n            return;\r\n        }\r\n\r\n        var items = \$(\"#userTree\").dynatree(\"getSelectedNodes\");\r\n        if(items.length == 0)\r\n        {\r\n            alert(\"";
+echo _( "请选择要导入的人员" );
+echo "\");\r\n        }\r\n        else\r\n        {\r\n            var user_id = [];\r\n            for(var i in items)\r\n            {\r\n                if(items[i].data.user_id)\r\n                    user_id.push(items[i].data.user_id);\r\n            }\r\n\r\n            if(user_id.length == 0)\r\n            {\r\n                alert(\"";
+echo _( "选择部门无效果，请选择具体人员" );
+echo "\");\r\n                return;\r\n            }\r\n\r\n\r\n            \$(this).addClass(\"disabled\");\r\n            S.import = 1;\r\n\r\n            \$.ajax({\r\n                type: \"GET\",\r\n                url: \"oa_user.php\",\r\n                dataType: 'json',\r\n                data: {'action': 'importUser', 'user_id': user_id.join(\",\")},\r\n                success: function(msg){\r\n                    if(msg.success || msg.failed || msg.exists)\r\n                    {\r\n                        \$(\"#sync-modal .modal-body p\").html('";   
+echo _( "导入成功：" );
+echo "' + msg.success + ' ";
+echo _( "导入失败：" );
+echo "' + msg.failed + ' ";
+echo _( "重复忽略：" );
+echo "' + msg.exists);\r\n                        \$.noConflict();\r\n                        \$(\"#sync-modal\").modal('show');\r\n                        window.\$=window.jQuery;\r\n                        S.import = 0;\r\n                        self.removeClass(\"disabled\");\r\n                    }\r\n                }\r\n            });\r\n        }\r\n    });\r\n});\r\n</script>\r\n<div>\r\n    <div class=\"sync-item\">\r\n        <button id=\"btn-oa-user-sync\" class=\"btn btn-small btn-primary\" type=\"button\">";
+echo _( "导入选择的人员" );			//add '\$.noConflict();\r\n                        ',' window.\$=window.jQuery;\r\n                        '
+echo "</button>\r\n    </div>\r\n    <div class=\"sync-tree sync-user-tree\">\r\n        ";
+$xtree_id = "userTree";
+$showButton = "1";
+include_once( "inc/user_list/index.php" );
+echo "    </div>\r\n</div>\r\n<div id=\"sync-modal\" class=\"modal hide fade\">\r\n    <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h3>";
+echo _( "同步结果" );
+echo "</h3>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n        <p></p>\r\n    </div>\r\n    <div class=\"modal-footer\">\r\n        <button type=\"botton\" class=\"btn\" data-dismiss=\"modal\">";
+echo _( "关闭" );
+echo "</button>\r\n    </div>\r\n</div>\r\n</body>\r\n</html>";
+?>
