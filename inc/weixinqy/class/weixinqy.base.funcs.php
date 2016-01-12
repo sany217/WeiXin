@@ -8,6 +8,7 @@ class WeiXinQY
 	private $weixinqy_token_url = "gettoken";
 	private $weixinqy_user_url = "user/getuserinfo";
 	public $_base_config = array( );
+	public $deptinfo = array( );
 	public $debug = TRUE;
 	public $_logcallback = "logg";
 
@@ -24,6 +25,7 @@ class WeiXinQY
 		$this->corpid = $weixinqy_corpid;
 		$this->corpsecret = $weixinqy_secret;
 		$this->getTokens( );
+		$this->getDeptInfo( );
 		include( "weixinqy.config.php" );
 		$this->_base_config = $WXQY_CONFIG;
 	}
