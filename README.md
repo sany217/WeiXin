@@ -46,5 +46,6 @@
 \general\system\weixinqy\basic\weixin_app_sms.php  
 \general\system\weixinqy\basic\weixin_org.php  
 \general\system\weixinqy\basic\weixin_dept_list.php  
+\general\system\weixinqy\task\instant_msg_offline_push.php  
 
 \general\system\weixinqy\install.php	用浏览器访问install.php完成安装  
